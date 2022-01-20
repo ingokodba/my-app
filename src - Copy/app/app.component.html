@@ -1,0 +1,49 @@
+<section id="">
+    <mat-drawer-container class="example-container">
+        <header>
+            <mat-toolbar>
+                <button mat-icon-button style="margin-right: 20px;" class="example-icon" mat-button (click)="drawer.toggle()" aria-label="Example icon-button with menu icon">
+                <mat-icon>menu</mat-icon>
+                </button>
+                <button mat-icon-button style="margin-right: 20px;" routerLink="/dashboard" class="example-icon" aria-label="Example icon-button with menu icon">
+                    <mat-icon>home</mat-icon>
+                </button>
+                <span>{{title}}</span>
+                <span class="example-spacer"></span>
+                <app-hero-search></app-hero-search>
+                <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with search icon">
+                <mat-icon>search</mat-icon>
+                </button> -->
+            </mat-toolbar>
+            <!-- <div class="nav-flex">
+                <div>
+                    <a routerLink="/dashboard">Dashboard</a>
+                </div>
+                <div>
+                    <a routerLink="/heroes">Heroes</a>
+                </div>
+                <div>
+                    <app-hero-search></app-hero-search>
+                </div>
+            </div> -->
+        </header>
+        <mat-drawer #drawer class="example-sidenav" mode="side">
+            <app-heroes></app-heroes>
+            <!--     <p>Auto-resizing sidenav</p>
+                <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+                <button (click)="showFiller = !showFiller" mat-raised-button>
+                  Toggle extra text
+                </button> -->
+              </mat-drawer>
+        <!-- <div class="sidebar">
+            <app-heroes></app-heroes>
+        </div> -->
+        <main>
+            <router-outlet></router-outlet>
+            
+        </main>
+        <footer><div class="to-bottom messages">
+                <app-messages></app-messages>
+            </div></footer>
+    </mat-drawer-container>
+</section>

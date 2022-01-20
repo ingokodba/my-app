@@ -1,0 +1,36 @@
+<!--<div id="search-component">
+  <label for="search-box">Hero Search</label>
+  <input #searchBox id="search-box" (input)="search(searchBox.value)" />
+
+  <ul class="search-result">
+    <li *ngFor="let hero of heroes$ | async" >
+      <a routerLink="/detail/{{hero.id}}">
+        {{hero.name}}
+      </a>
+    </li>
+  </ul>
+  
+</div>-->
+
+<form class="example-form">
+  <mat-form-field class="example-form-field" appearance="fill">
+    <mat-label>Hero search</mat-label>
+    <input type="text"
+           placeholder="Search through heroes"
+           aria-label="Hero search"
+           matInput
+           [formControl]="myControl"
+           [matAutocomplete]="auto"
+           [(ngModel)]="value">
+    <button *ngIf="value" matSuffix mat-icon-button aria-label="Search" (click)="navigateto()">
+      <mat-icon>search</mat-icon>
+    </button>
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      <mat-option *ngFor="let hero of filteredOptions | async" [value]="hero.name">
+        <!-- <a routerLink="/detail/{{hero.id}}"> -->
+          {{hero.name}}
+        <!-- </a> -->
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>
