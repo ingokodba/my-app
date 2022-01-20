@@ -13,7 +13,6 @@ export class HeroesComponent implements OnInit {
 
   heroes: Hero[] = [];
 
-
   selectedHero?: Hero;
   onSelect(hero: Hero): void {
     this.selectedHero = hero;
@@ -34,6 +33,11 @@ export class HeroesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getHeroes();
+    this.heroService.heroAdded.subscribe(
+      (hero) => {
+        this.heroes.push(hero)
+      }
+    )
   }
 
 }

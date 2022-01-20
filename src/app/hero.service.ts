@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
@@ -7,9 +7,9 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Hero } from './hero';
 import { MessageService } from './message.service';
 
-
 @Injectable({ providedIn: 'root' })
 export class HeroService {
+  heroAdded = new EventEmitter<Hero>();
 
   private heroesUrl = 'api/heroes';  // URL to web api
 
@@ -72,7 +72,10 @@ export class HeroService {
   /** POST: add a new hero to the server */
   addHero(hero: Hero): Observable<Hero> {
     return this.http.post<Hero>(this.heroesUrl, hero, this.httpOptions).pipe(
-      tap((newHero: Hero) => this.log(`added hero w/ id=${newHero.id}`)),
+      tap((newHero: Hero) => {
+        this.log(`added hero w/ id=${newHero.id}`);
+        this.heroAdded.emit(newHero)
+    }),
       catchError(this.handleError<Hero>('addHero'))
     );
   }
